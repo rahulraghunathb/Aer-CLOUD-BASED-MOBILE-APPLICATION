@@ -10,12 +10,15 @@ import {
   Keyboard
 } from 'react-native'
 import { Input, Button } from 'react-native-elements'
+import { useNavigation } from '@react-navigation/native'
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState()
   const [emailError, setEmailError] = useState('')
   const [registrationError, setRegistrationError] = useState('')
+
+  const navigation = useNavigation()
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -45,7 +48,9 @@ const LoginScreen = () => {
       if (response.ok) {
         const data = await response.json()
         console.log(data) // Log the server response
-        // Handle successful registration, navigate to the next screen, etc.
+
+        // Navigate to HomeScreen on successful registration
+        navigation.navigate('Home')
       } else {
         console.error('Registration failed:', response.status)
         if (response.status === 400) {
@@ -71,7 +76,7 @@ const LoginScreen = () => {
     <TouchableWithoutFeedback onPress={dismissKeyboard}>
       <View style={styles.container}>
         {/* App Logo */}
-        <Image source={require('../assets/icon.png')} style={styles.logo} />
+        <Image source={require('../../assets/icon.png')} style={styles.logo} />
 
         {/* Welcome Text */}
         <Text style={styles.welcomeText}>Welcome to Your App!</Text>
@@ -92,7 +97,9 @@ const LoginScreen = () => {
         ) : null}
 
         {registrationError ? (
-          <Text style={{ color: 'red' }}>{registrationError}</Text>
+          <Text style={{ color: 'red', fontWeight: 'bold' }}>
+            {registrationError}
+          </Text>
         ) : null}
 
         {/* Password Input */}
@@ -136,33 +143,36 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   welcomeText: {
-    fontSize: 18,
+    fontSize: 28,
+    marginTop: 20,
+    marginBottom: 30,
     fontWeight: 'bold',
-    marginBottom: 20
+    marginBottom: 30
   },
   customButton: {
     alignItems: 'center',
-    borderRadius: 8,
+    borderRadius: 14,
     backgroundColor: '#FFD814',
     borderWidth: 1,
     borderColor: '#FCD200',
     fontSize: 13,
-    height: 31,
+    height: 40,
     paddingVertical: 0,
     paddingHorizontal: 11,
     textAlign: 'center',
     width: '100%',
-    minWidth: 200
+    minWidth: 300
   },
   customButtonText: {
-    fontSize: 13,
+    fontSize: 17,
     fontWeight: '500',
     color: '#0F1111'
   },
   registerLink: {
     marginTop: 10,
     color: '#3498db',
-    textDecorationLine: 'underline'
+    textDecorationLine: 'underline',
+    fontWeight: 'bold'
   }
 })
 
