@@ -3,45 +3,65 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-const Footer = () => {
+const Footer = ({ activeOption }) => {
+  const options = [
+    { name: 'phone-portrait', text: 'Add Device' },
+    { name: 'home-outline', text: 'Home' },
+    { name: 'book-outline', text: 'Blog' },
+    { name: 'mail-outline', text: 'Contact Us' }
+  ]
+
   return (
     <View style={styles.footer}>
-      <View style={styles.footerOption}>
-        <Icon name="phone-portrait-outline" size={20} color="#fff" />
-        <Text style={styles.footerText}>My Devices</Text>
-      </View>
-      <View style={styles.footerOption}>
-        <Icon name="home" size={20} color="#fff" />
-        <Text style={styles.footerText}>Home</Text>
-      </View>
-      <View style={styles.footerOption}>
-        <Icon name="mail-outline" size={20} color="#fff" />
-        <Text style={styles.footerText}>Contact Us</Text>
-      </View>
+      {options.map((option, index) => (
+        <View key={index} style={styles.footerOption}>
+          <Icon
+            name={activeOption === option.name ? option.name : `${option.name}`}
+            size={20}
+            color={activeOption === option.name ? '#ff0000' : '#fff'}
+            style={activeOption === option.name ? styles.activeIcon : null}
+          />
+          <Text
+            style={[
+              styles.footerText,
+              activeOption === option.name ? styles.activeText : null
+            ]}
+          >
+            {option.text}
+          </Text>
+        </View>
+      ))}
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   footer: {
-    backgroundColor: '#d5bc15',
-    flexDirection: 'row', // Make options horizontal
+    backgroundColor: '#111307',
+    flexDirection: 'row',
     padding: 15,
     alignItems: 'center',
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    justifyContent: 'space-around' // Space the options evenly
+    justifyContent: 'space-around'
   },
   footerOption: {
     flexDirection: 'row',
     alignItems: 'center'
   },
   footerText: {
-    color: '#2a2504',
+    color: '#F2F4E1',
     fontSize: 16,
-    marginVertical: 5,
-    marginLeft: 5
+    marginVertical: 2,
+    marginLeft: 3
+  },
+  activeIcon: {
+    fontWeight: 'bold'
+  },
+  activeText: {
+    color: '#ff0000',
+    fontWeight: 'bold'
   }
 })
 

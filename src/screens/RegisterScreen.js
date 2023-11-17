@@ -1,5 +1,4 @@
-// src/LoginScreen.js
-import React, { useReducer, useState } from 'react'
+import React, { useState } from 'react'
 import {
   View,
   Text,
@@ -10,63 +9,75 @@ import {
   Keyboard
 } from 'react-native'
 import { Input, Button } from 'react-native-elements'
-// import { Link, userRouter } from 'expo-router'
+import { useNavigation } from '@react-navigation/native'
 
-const LoginScreen = () => {
+const RegisterScreen = () => {
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState()
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [emailError, setEmailError] = useState('')
+  const [passwordError, setPasswordError] = useState('')
+  const [confirmPasswordError, setConfirmPasswordError] = useState('')
   const [registrationError, setRegistrationError] = useState('')
 
-  // const router = userRouter()
+  const navigation = useNavigation()
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     return emailRegex.test(email)
   }
 
+  const validatePassword = (password) => {
+    // Add your password validation logic here if needed
+    return password.length >= 6 // Example: Password should be at least 6 characters
+  }
+
   const handleRegistration = async () => {
     if (!validateEmail(email)) {
       setEmailError('Invalid email address')
+      setPasswordError('')
+      setConfirmPasswordError('')
       setRegistrationError('')
       return
     }
 
-    // Clear any previous email error and registration error
+    if (!validatePassword(password)) {
+      setPasswordError('Password should be at least 6 characters')
+      setConfirmPasswordError('')
+      setEmailError('')
+      setRegistrationError('')
+      return
+    }
+
+    if (password !== confirmPassword) {
+      setConfirmPasswordError('Passwords do not match')
+      setEmailError('')
+      setPasswordError('')
+      setRegistrationError('')
+      return
+    }
+
+    // Clear any previous errors
     setEmailError('')
+    setPasswordError('')
+    setConfirmPasswordError('')
     setRegistrationError('')
 
     try {
-      const response = await fetch('http://10.145.71.244:8000/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        console.log(data) // Log the server response
-
-        // Navigate to HomeScreen on successful registration
-        navigation.navigate('Home')
-      } else {
-        console.error('Registration failed:', response.status)
-        if (response.status === 400) {
-          setRegistrationError('Email is already in use')
-        }
-      }
+      // Your registration logic here
+      // ...
+      // Navigate to HomeScreen on successful registration
+      //   navigation.navigate('Home')
     } catch (error) {
       console.error('Error during registration:', error)
       setRegistrationError('Failed to register user')
     }
   }
 
-  const handleRegister = () => {
-    // Add your registration navigation logic here
-    console.log('Navigate to registration screen')
-    // router.push('/RegisterScreen')
+  const handleLogin = () => {
+    // Add your login navigation logic here
+    console.log('Navigate to login screen')
   }
 
   const dismissKeyboard = () => {
@@ -83,7 +94,7 @@ const LoginScreen = () => {
         />
 
         {/* Welcome Text */}
-        <Text style={styles.welcomeText}>Login into the App!!!</Text>
+        <Text style={styles.welcomeText}>Create an Account</Text>
 
         {/* Email Input */}
         <Input
@@ -99,32 +110,57 @@ const LoginScreen = () => {
 
         {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
 
-        {registrationError ? (
-          <Text style={styles.errorText}>{registrationError}</Text>
-        ) : null}
-
         {/* Password Input */}
         <Input
           placeholder="Password"
           label="Password"
           onChangeText={(text) => setPassword(text)}
           value={password}
-          secureTextEntry
+          secureTextEntry={!showPassword}
           leftIcon={{ type: 'material', name: 'lock' }}
+          rightIcon={{
+            type: 'material',
+            name: showPassword ? 'visibility-off' : 'visibility',
+            onPress: () => setShowPassword(!showPassword)
+          }}
           inputStyle={styles.input}
         />
 
-        {/* Login Button */}
+        {passwordError ? (
+          <Text style={styles.errorText}>{passwordError}</Text>
+        ) : null}
+
+        {/* Confirm Password Input */}
+        <Input
+          placeholder="Confirm Password"
+          label="Confirm Password"
+          onChangeText={(text) => setConfirmPassword(text)}
+          value={confirmPassword}
+          secureTextEntry={!showPassword}
+          leftIcon={{ type: 'material', name: 'lock' }}
+          rightIcon={{
+            type: 'material',
+            name: showPassword ? 'visibility-off' : 'visibility',
+            onPress: () => setShowPassword(!showPassword)
+          }}
+          inputStyle={styles.input}
+        />
+
+        {confirmPasswordError ? (
+          <Text style={styles.errorText}>{confirmPasswordError}</Text>
+        ) : null}
+
+        {/* Register Button */}
         <Button
-          title="Login"
+          title="Register"
           onPress={handleRegistration}
           buttonStyle={styles.customButton}
           titleStyle={styles.customButtonText}
         />
 
-        {/* Registration Link */}
-        <Text style={styles.registerLink} onPress={handleRegister}>
-          Don't have an account? Register here
+        {/* Login Link */}
+        <Text style={styles.loginLink} onPress={handleLogin}>
+          Already have an account? Login here
         </Text>
       </View>
     </TouchableWithoutFeedback>
@@ -173,7 +209,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#f2f4e1' // Button text color
   },
-  registerLink: {
+  loginLink: {
     marginTop: 10,
     color: '#3498db',
     textDecorationLine: 'underline',
@@ -182,7 +218,13 @@ const styles = StyleSheet.create({
   errorText: {
     color: '#ff0000',
     fontWeight: 'bold'
+  },
+  input: {
+    color: '#111307' // Text color
+  },
+  showPasswordIcon: {
+    marginRight: 10
   }
 })
 
-export default LoginScreen
+export default RegisterScreen

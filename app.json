@@ -4,16 +4,14 @@
     "slug": "Aer",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logoMark.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "image": "./assets/logoText.png",
+      "resizeMode": "centre",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -21,10 +19,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "sgf.fgsdfgds.sdfg"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/logoMark.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d17e92d2-e82e-4542-95ec-e9906b8a056c"
+      }
     }
   }
 }

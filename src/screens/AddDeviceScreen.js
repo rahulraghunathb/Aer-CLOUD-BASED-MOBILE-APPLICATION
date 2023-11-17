@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import Footer from '../components/Footer'
+import Header from '../components/Header'
 
 const AddDeviceScreen = () => {
-  const [scannerResult, setScannerResult] = useState('Scan a QR code')
+  const [scannerResult, setScannerResult] = useState('Scan Device QR code')
 
   // Add your QR code scanning logic here
 
@@ -16,6 +18,7 @@ const AddDeviceScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Header />
       <View style={styles.scannerContainer}>
         <View style={styles.scannerIcon}></View>
         <Text style={styles.scannerResultText}>{scannerResult}</Text>
@@ -27,7 +30,7 @@ const AddDeviceScreen = () => {
 
       <View style={styles.buttonsContainer}>
         <TouchableOpacity
-          style={[styles.button, { backgroundColor: '#3498db' }]}
+          style={[styles.button, { backgroundColor: '#f2f4e1' }]}
           onPress={handleAddDevice}
         >
           <Text style={styles.buttonText}>Add Device</Text>
@@ -39,6 +42,7 @@ const AddDeviceScreen = () => {
           <Text style={styles.buttonText}>Retake</Text>
         </TouchableOpacity>
       </View>
+      <Footer />
     </View>
   )
 }
@@ -48,7 +52,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f4f4f4'
+    backgroundColor: '#FFFFFF'
   },
   scannerContainer: {
     width: '80%',
