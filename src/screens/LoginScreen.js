@@ -7,18 +7,18 @@ import {
   StyleSheet,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  Pressable
 } from 'react-native'
 import { Input, Button } from 'react-native-elements'
-// import { Link, userRouter } from 'expo-router'
+import { useNavigation } from '@react-navigation/native'
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState()
   const [emailError, setEmailError] = useState('')
   const [registrationError, setRegistrationError] = useState('')
-
-  // const router = userRouter()
+  const navigation = useNavigation()
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -50,7 +50,7 @@ const LoginScreen = () => {
         console.log(data) // Log the server response
 
         // Navigate to HomeScreen on successful registration
-        navigation.navigate('Home')
+        // navigation.navigate('Home')
       } else {
         console.error('Registration failed:', response.status)
         if (response.status === 400) {
@@ -66,7 +66,7 @@ const LoginScreen = () => {
   const handleRegister = () => {
     // Add your registration navigation logic here
     console.log('Navigate to registration screen')
-    // router.push('/RegisterScreen')
+    // const navigation = useNavigation()
   }
 
   const dismissKeyboard = () => {
@@ -123,7 +123,11 @@ const LoginScreen = () => {
         />
 
         {/* Registration Link */}
-        <Text style={styles.registerLink} onPress={handleRegister}>
+        {/* <Text style={styles.registerLink} onPress={handleRegister}> */}
+        <Text
+          style={styles.registerLink}
+          onPress={() => navigation.navigate('Register')}
+        >
           Don't have an account? Register here
         </Text>
       </View>

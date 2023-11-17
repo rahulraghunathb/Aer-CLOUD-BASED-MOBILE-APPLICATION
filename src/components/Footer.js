@@ -1,20 +1,31 @@
 // Footer.js
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 const Footer = ({ activeOption }) => {
+  const navigation = useNavigation()
+
   const options = [
-    { name: 'phone-portrait', text: 'Add Device' },
-    { name: 'home-outline', text: 'Home' },
-    { name: 'book-outline', text: 'Blog' },
-    { name: 'mail-outline', text: 'Contact Us' }
+    { name: 'phone-portrait', text: 'Add Device', route: 'AddDevice' },
+    { name: 'home-outline', text: 'Home', route: 'Home' },
+    { name: 'book-outline', text: 'Blog', route: 'Blog' },
+    { name: 'mail-outline', text: 'Contact Us', route: 'ContactUs' }
   ]
+
+  const handleOptionPress = (route) => {
+    navigation.navigate(route)
+  }
 
   return (
     <View style={styles.footer}>
       {options.map((option, index) => (
-        <View key={index} style={styles.footerOption}>
+        <TouchableOpacity
+          key={index}
+          style={styles.footerOption}
+          onPress={() => handleOptionPress(option.route)}
+        >
           <Icon
             name={activeOption === option.name ? option.name : `${option.name}`}
             size={20}
@@ -29,7 +40,7 @@ const Footer = ({ activeOption }) => {
           >
             {option.text}
           </Text>
-        </View>
+        </TouchableOpacity>
       ))}
     </View>
   )

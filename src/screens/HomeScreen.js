@@ -93,7 +93,7 @@ const HomeScreen = () => {
 
       <View style={styles.contentContainer}>{renderCards()}</View>
 
-      <Footer />
+      <Footer activeOption="home-outline" />
     </View>
   )
 }

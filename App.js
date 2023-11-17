@@ -7,13 +7,14 @@ import HomeScreen from './src/screens/HomeScreen'
 import AddDeviceScreen from './src/screens/AddDeviceScreen'
 import ContactUsScreen from './src/screens/ContactUsScreen'
 import DashboardScreen from './src/screens/DashboardScreen'
+import BlogScreen from './src/screens/BlogScreen'
 
 const Stack = createStackNavigator()
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="RegisterScreen">
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Login"
           component={LoginScreen}
@@ -32,7 +33,7 @@ const App = () => {
         <Stack.Screen
           name="ContactUs"
           component={ContactUsScreen}
-          options={{ headerShown: false }}
+          options={{ headerShown: false, statusbar: '#fff' }}
         />
         <Stack.Screen
           name="Register"
@@ -43,6 +44,11 @@ const App = () => {
           name="Dashboard"
           component={DashboardScreen}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Blog"
+          component={BlogScreen}
+          options={{ headerShown: false, statusbar: '#111307' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

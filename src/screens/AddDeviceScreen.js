@@ -30,19 +30,19 @@ const AddDeviceScreen = () => {
 
       <View style={styles.buttonsContainer}>
         <TouchableOpacity
-          style={[styles.button, { backgroundColor: '#f2f4e1' }]}
+          style={[styles.button, { backgroundColor: '#359740' }]}
           onPress={handleAddDevice}
         >
           <Text style={styles.buttonText}>Add Device</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.button, { backgroundColor: '#e74c3c' }]}
+          style={[styles.button, { backgroundColor: '#c93514' }]}
           onPress={handleRetake}
         >
           <Text style={styles.buttonText}>Retake</Text>
         </TouchableOpacity>
       </View>
-      <Footer />
+      <Footer activeOption="phone-portrait" />
     </View>
   )
 }
@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFFFFF'
+    justifyContent: 'center'
+    // backgroundColor: '#FFFFFF'
   },
   scannerContainer: {
     width: '80%',

@@ -42,7 +42,7 @@ const ContactUsScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <Footer />
+      <Footer activeOption="mail-outline" />
     </View>
   )
 }
@@ -50,7 +50,7 @@ const ContactUsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f2f4e1',
+    // backgroundColor: '#f2f4e1',
     marginTop: 30
   },
   contentContainer: {

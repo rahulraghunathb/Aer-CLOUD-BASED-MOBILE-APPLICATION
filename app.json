@@ -11,7 +11,9 @@
       "resizeMode": "centre",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -29,6 +31,9 @@
       "eas": {
         "projectId": "d17e92d2-e82e-4542-95ec-e9906b8a056c"
       }
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }

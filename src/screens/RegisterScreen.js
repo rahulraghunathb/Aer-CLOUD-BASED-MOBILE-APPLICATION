@@ -78,6 +78,7 @@ const RegisterScreen = () => {
   const handleLogin = () => {
     // Add your login navigation logic here
     console.log('Navigate to login screen')
+    navigation.navigate('Login')
   }
 
   const dismissKeyboard = () => {

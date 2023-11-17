@@ -2,18 +2,27 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { useNavigation } from '@react-navigation/native'
 
 const Header = () => {
+  const navigation = useNavigation()
+
   return (
     <View style={styles.header}>
       <View style={styles.backArrow}>
-        <Icon name="ios-arrow-back" size={30} color="#333" />
+        <Icon
+          name="ios-arrow-back"
+          size={30}
+          color="#333"
+          onPress={() => navigation.goBack()}
+        />
       </View>
 
       <View style={styles.logoContainer}>
         <Image
           source={require('../../assets/logoText.png')}
           style={styles.logo}
+          // onPress={() => navigation.navigate('Register')}
         />
       </View>
     </View>
